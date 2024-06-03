@@ -19,4 +19,12 @@ sudo pacman -S texlive texlive-langenglish minted biber pdftk dblatex latex2html
 From Terminal Emulator or Command Line, change to project folder and run:
 
 ```sh
+make all
 ```
+
+and to clean
+
+```sh
+make clean
+```
+
