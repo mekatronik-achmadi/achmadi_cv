@@ -18,3 +18,4 @@ clean:
 	rm -f *.aux *Notes.bib
 	rm -f *.pdf
 	rm -rf ./_minted*
+	rm -rf $(OUTDIR)/
