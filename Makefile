@@ -1,14 +1,16 @@
-TEXCC=pdflatex
+TEXCC=lualatex
 BIBCC=bibtex
 TEXFLAGS=-shell-escape -synctex=1 -interaction=nonstopmode
 TEXFILE=$(shell basename --suffix=.tex $$(ls -1 *.tex))
+OUTDIR=output_pdf
 
 # '-' sign mean keep going even if the command fail
 all:
-	-$(TEXCC) $(TEXFLAGS) $(TEXFILE).tex
-	-$(BIBCC) $(TEXFILE).aux
-	-$(TEXCC) $(TEXFLAGS) $(TEXFILE).tex
-	-$(TEXCC) $(TEXFLAGS) $(TEXFILE).tex # run twice to update ToC/BibTeX
+	mkdir -p $(OUTDIR)
+	-$(TEXCC) $(TEXFLAGS) $(TEXFILE).tex --output-directory=$(OUTDIR)
+	-$(BIBCC) $(OUTDIR)/$(TEXFILE).aux
+	-$(TEXCC) $(TEXFLAGS) $(TEXFILE).tex --output-directory=$(OUTDIR)
+	-$(TEXCC) $(TEXFLAGS) $(TEXFILE).tex --output-directory=$(OUTDIR) # run twice to update ToC/BibTeX
 
 clean:
 	rm -f *.out *.bbl *.blg *.lof *.lot *.nav *.vrb
